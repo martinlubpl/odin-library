@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600&display=swap');
+
+* {
+    font-family: 'Dancing Script', cursive;
+    font-size: 16px;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background: url("img/bg.jpg") bottom center no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+}
+header {
+    font-size: 48px;
+    background-color: rgb(16, 98, 104);
+    padding: 2rem;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 10px 5px rgba(0, 0, 0, 0.1);
+}
+
+main {
+    display: flex;
+    background-color: rgba(16, 98, 104, 0.5);
+    padding: 2rem;
+    height: 100%;
+}
+
+.card {
+    width: 200px;
+    height: 300px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgba(16, 98, 104, 0.5);
+}
+
+.add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.add button {
+    font-size: larger;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: 3px solid rgb(69, 210, 223);
+    font-weight: 600;
+    background-color: rgb(172, 241, 255);
+}
