@@ -27,12 +27,12 @@ function displayBooks(arr) {
   }
 }
 
-function addCard(book) {
+function addCard(book, position = undefined) {
   const main = document.querySelector('main');
   const card = document.createElement('div');
 
-  
-  
+
+
   const title = document.createElement('div');
   title.innerText = book.title;
   card.appendChild(title);
@@ -52,7 +52,7 @@ function addCard(book) {
   const statusBtn = document.createElement('button');
   statusBtn.innerText = 'Change status';
   card.appendChild(statusBtn);
-  
+
   const deleteBtn = document.createElement('button');
   deleteBtn.innerText = 'Delete from library';
   card.appendChild(deleteBtn);
@@ -60,21 +60,48 @@ function addCard(book) {
 
   // append whole card
   card.classList.add('card');
-  main.appendChild(card);
+  if (position === undefined) {
+    main.appendChild(card);
+  } else {
+    console.log(main.children[position]);
+    main.insertBefore(card, main.children[position]);
+  }
 }
 //add book button
 const addBtn = document.querySelector('.add>button');
 const form = document.querySelector('.new-book');
-addBtn.addEventListener('click', ()=> {
+addBtn.addEventListener('click', () => {
   form.classList.remove('hidden');
 })
 // cancel
 const cancelBtn = document.querySelector('.cancel');
-console.log(cancelBtn);
-cancelBtn.addEventListener('click', ()=> {
+cancelBtn.addEventListener('click', () => {
   form.classList.add('hidden');
 })
+// save
+const saveBtn = document.querySelector('.save');
+// const form = document.querySelector(".new-book>form");
+const title = form.querySelector("#title");
+const author = form.querySelector("#author");
+const pages = form.querySelector("#pages");
+const read = form.querySelector("#read");
+saveBtn.addEventListener('click', () => {
 
+  console.log(title, author, pages, read);
+
+  let newBook = new Book(title.value, author.value, Number(pages.value), Boolean(read.checked));
+  addBookToLibrary(newBook, 2);
+  addCard(newBook, 1);
+  clearForm();
+})
+function clearForm() {
+  // const form = document.querySelector(".new-book>form");
+  form.querySelector("#title").value = '';
+  form.querySelector("#author").value = '';
+  form.querySelector("#pages").value = '';
+  form.querySelector("#read").checked = false;
+  form.classList.add("hidden");
+}
 
 //init
 displayBooks(myLibrary);
