@@ -18,16 +18,20 @@ function Book(title, author, pages, read) {
 
 
 function addBookToLibrary(book) {
-  myLibrary.unshift(book);
+  myLibrary.push(book);
 }
 
 function displayBooks(arr) {
-  for (let book of arr) {
-    addCard(book);
+  for (let i=0; i<arr.length; i++) {
+    addCard(arr[i], i)
   }
+
+  // for (let book of arr) {
+  //   addCard(book);
+  // }
 }
 
-function addCard(book, position = undefined) {
+function addCard(book, datasetid) {
   const main = document.querySelector('main');
   const card = document.createElement('div');
 
@@ -43,7 +47,7 @@ function addCard(book, position = undefined) {
   pages.innerText = book.pages;
   card.appendChild(pages);
 
-  // console.log(book.read);
+ 
   const read = document.createElement('div');
   const read_txt = (book.read) ? "Yes" : "No"
   read.innerText = "Read: " + read_txt;
@@ -55,17 +59,19 @@ function addCard(book, position = undefined) {
 
   const deleteBtn = document.createElement('button');
   deleteBtn.innerText = 'Delete from library';
+  deleteBtn.dataset.id = datasetid;
+  deleteBtn.addEventListener('click', (e) => {
+    const targetId = e.target.dataset.id;
+    const toRemove = document.querySelector(`[data-id="${targetId}"]`);
+    toRemove.remove();
+  })
   card.appendChild(deleteBtn);
-
+  
 
   // append whole card
   card.classList.add('card');
-  if (position === undefined) {
-    main.appendChild(card);
-  } else {
-    console.log(main.children[position]);
-    main.insertBefore(card, main.children[position]);
-  }
+  card.dataset.id = datasetid;
+  main.appendChild(card);
 }
 //add book button
 const addBtn = document.querySelector('.add>button');
@@ -87,11 +93,11 @@ const pages = form.querySelector("#pages");
 const read = form.querySelector("#read");
 saveBtn.addEventListener('click', () => {
 
-  console.log(title, author, pages, read);
+  
 
   let newBook = new Book(title.value, author.value, Number(pages.value), Boolean(read.checked));
   addBookToLibrary(newBook, 2);
-  addCard(newBook, 1);
+  addCard(newBook, myLibrary.length-1);
   clearForm();
 })
 function clearForm() {
@@ -102,6 +108,8 @@ function clearForm() {
   form.querySelector("#read").checked = false;
   form.classList.add("hidden");
 }
+
+
 
 //init
 displayBooks(myLibrary);
