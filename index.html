@@ -15,7 +15,21 @@
     <main>
         <div class="add card">
             <button>Add new book</button>
+            <!-- hidden form -->
+            <div class="new-book hidden">
+                <form action="#">
+                    <label for="title">Title</label>
+                    <input type="text" id="title">
+                    <label for="author">Author</label>
+                    <input type="text" id="author">
+                    <label for="pages">Pages</label>
+                    <input type="number" min="30" max="2000">
+                    <button type="submit">Save</button>
+                    <button class="cancel" type="button">Cancel</button>
+                </form>
+            </div>
         </div>
+
     </main>
 </body>
 

@@ -43,7 +43,7 @@ function addCard(book) {
   pages.innerText = book.pages;
   card.appendChild(pages);
 
-  console.log(book.read);
+  // console.log(book.read);
   const read = document.createElement('div');
   const read_txt = (book.read) ? "Yes" : "No"
   read.innerText = "Read: " + read_txt;
@@ -62,11 +62,19 @@ function addCard(book) {
   card.classList.add('card');
   main.appendChild(card);
 }
+//add book button
+const addBtn = document.querySelector('.add>button');
+const form = document.querySelector('.new-book');
+addBtn.addEventListener('click', ()=> {
+  form.classList.remove('hidden');
+})
+// cancel
+const cancelBtn = document.querySelector('.cancel');
+console.log(cancelBtn);
+cancelBtn.addEventListener('click', ()=> {
+  form.classList.add('hidden');
+})
 
 
-
-
-
-
-
+//init
 displayBooks(myLibrary);
