@@ -52,9 +52,17 @@ function addCard(book, datasetid) {
   const read_txt = (book.read) ? "Yes" : "No"
   read.innerText = "Read: " + read_txt;
   card.appendChild(read);
-
+  //change status of book
   const statusBtn = document.createElement('button');
   statusBtn.innerText = 'Change status';
+  statusBtn.dataset.id = datasetid;
+  statusBtn.classList.add('status-btn');
+  statusBtn.addEventListener('click', function () {
+    book.read = !book.read;
+    // console.log(myLibrary);
+    read.innerText = "Read: " + ((book.read) ? "Yes" : "No");
+  })
+
   card.appendChild(statusBtn);
   // delete
   const deleteBtn = document.createElement('button');
@@ -62,21 +70,29 @@ function addCard(book, datasetid) {
   deleteBtn.dataset.id = datasetid;
   deleteBtn.addEventListener('click', (e) => {
     const targetId = e.target.dataset.id;
-    
+    // remove from array
     myLibrary.splice(targetId,1);
-    
+    //remove card
     const toRemove = document.querySelector(`[data-id="${targetId}"]`);
     toRemove.remove();
 
     //change data attributes to match index in myLibrary
     const cards = document.querySelectorAll('.card');
     for (let i = 1; i < cards.length; i++) {
+      console.log(cards[i]);
       cards[i].dataset.id = i-1;
+      
+      const statBtn = cards[i].querySelector('.status-btn');
+      statBtn.dataset.id = i-1;
+      
       const delBtn = cards[i].querySelector('button:last-child');
       delBtn.dataset.id = i-1;
-      console.log(delBtn);
+      
+      
     }
-    console.log(myLibrary);
+    
+    
+
   })
   
   card.appendChild(deleteBtn);
