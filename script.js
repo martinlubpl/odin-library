@@ -1,5 +1,15 @@
 let myLibrary = [];
 
+//declaration moved to top
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+}
+
 // for testing purposes
 let book1 = new Book('The Hobbit', 'J.R.R. Tolkien', 295, true);
 let book2 = new Book('The Lord of the Rings', 'J.R.R. Tolkien', 400, false);
@@ -9,12 +19,14 @@ addBookToLibrary(book2);
 addBookToLibrary(book3);
 //end
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
+// function Book(title, author, pages, read) {
+//   this.title = title;
+//   this.author = author;
+//   this.pages = pages;
+//   this.read = read;
+// }
+
+
 
 
 function addBookToLibrary(book) {
